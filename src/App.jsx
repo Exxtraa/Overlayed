@@ -1,9 +1,21 @@
 import "./App.css";
-import { SignUpButton } from "@clerk/clerk-react";
-import { useUser, SignOutButton } from "@clerk/clerk-react";
+import { SignUpButton,SignInButton } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useUser } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
+
 
 function App() {
   const { isSignedIn } = useUser();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (isSignedIn) {
+      navigate("/home");
+    }
+  }, [isSignedIn, navigate]);
+  
 
   return (
     <div className="min-h-screen bg-black text-black">
@@ -16,42 +28,39 @@ function App() {
           OVERLAYED
         </div>
         <div className="flex items-center space-x-4">
-          <a
-            href="/pricing"
+          <Link
+            to="/pricing"
             className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium"
           >
             Pricing
-          </a>
+          </Link>
 
-          {isSignedIn ? (
-            <SignOutButton>
-              <button className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium">
-                Sign Out
-              </button>
-            </SignOutButton>
-          ) : (
-            <SignUpButton mode="modal">
-              <button className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium">
-                Create Account
-              </button>
-            </SignUpButton>
-          )}
+          {/* Modal login/signup */}
+          <SignUpButton mode="modal">
+            <button className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium">
+              Create Account
+            </button>
+          </SignUpButton>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="text-center py-20 px-4 ">
+      <section className="text-center py-20 px-4">
         <h1 className="text-4xl text-white md:text-6xl font-extrabold leading-tight">
           Insert Text Behind Images with{" "}
           <span className="text-orange-500 relative inline-block">
             AI
             <div className="absolute -bottom-1 left-0 w-full h-1 bg-orange-900 rounded-full"></div>
-          </span>{" "}
+          </span>
         </h1>
-        <p className="mt-6 text-gray-400 text-lg border border-gray-700 px-6 py-2 rounded-md inline-block">
+        <p className="mt-6 text-gray-400 text-lg border border-gray-700 px-5 py-2 rounded-md inline-block">
           Generate stunning YouTube thumbnails and content visuals that get
           noticed.
         </p>
+        <p className="mt-6 text-black text-lg border absolute left-298 border-gray-200 font-medium px-6 py-2 rounded-md inline-block bg-white">
+          5 Credits
+        </p>
+
       </section>
 
       {/* Image Grid */}
