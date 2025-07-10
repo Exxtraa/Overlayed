@@ -1,24 +1,41 @@
 import "./App.css";
-
+import { SignUpButton } from "@clerk/clerk-react";
+import { useUser, SignOutButton } from "@clerk/clerk-react";
 
 function App() {
+  const { isSignedIn } = useUser();
+
   return (
     <div className="min-h-screen bg-black text-black">
       {/* Navbar */}
-      <nav className="flex justify-between items-center px-6 py-4 ">
-        <div  style={{ fontFamily: '"Brush Script MT", cursive' }} className="md:text-2xl font-dancing font-bold text-white relative">
+      <nav className="flex justify-between items-center px-6 py-4">
+        <div
+          style={{ fontFamily: '"Brush Script MT", cursive' }}
+          className="md:text-2xl font-bold text-white relative"
+        >
           OVERLAYED
         </div>
         <div className="flex items-center space-x-4">
           <a
-            href="#"
+            href="/pricing"
             className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium"
           >
             Pricing
           </a>
-          <button className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium">
-            Create Account
-          </button>
+
+          {isSignedIn ? (
+            <SignOutButton>
+              <button className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium">
+                Sign Out
+              </button>
+            </SignOutButton>
+          ) : (
+            <SignUpButton mode="modal">
+              <button className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium">
+                Create Account
+              </button>
+            </SignUpButton>
+          )}
         </div>
       </nav>
 
@@ -31,7 +48,7 @@ function App() {
             <div className="absolute -bottom-1 left-0 w-full h-1 bg-orange-900 rounded-full"></div>
           </span>{" "}
         </h1>
-        <p className="mt-4 text-gray-400 text-lg">
+        <p className="mt-6 text-gray-400 text-lg border border-gray-700 px-6 py-2 rounded-md inline-block">
           Generate stunning YouTube thumbnails and content visuals that get
           noticed.
         </p>
@@ -76,7 +93,6 @@ function App() {
                 className={`w-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105 animate-fade-in ${
                   img.ratio === "portrait" ? "h-[500px]" : "h-[300px]"
                 }`}
-                               
               />
             </div>
           ))}
@@ -87,4 +103,3 @@ function App() {
 }
 
 export default App;
-
