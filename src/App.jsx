@@ -1,13 +1,13 @@
 import "./App.css";
 
+
 function App() {
   return (
     <div className="min-h-screen bg-black text-black">
       {/* Navbar */}
       <nav className="flex justify-between items-center px-6 py-4 ">
-        <div className="md:text-2xl font-bold text-white relative">
+        <div  style={{ fontFamily: '"Brush Script MT", cursive' }} className="md:text-2xl font-dancing font-bold text-white relative">
           OVERLAYED
-          <div className="absolute -bottom-1 left-0 w-full h-1 rounded-full"></div>
         </div>
         <div className="flex items-center space-x-4">
           <a
@@ -87,3 +87,4 @@ function App() {
 }
 
 export default App;
+
