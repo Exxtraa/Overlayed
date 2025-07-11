@@ -19,9 +19,12 @@ function Home() {
         <div className="flex items-center gap-4">
           {isSignedIn && (
             <>
-                <button className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200">
-                  0 Credits
-                </button>
+              <Link
+                to="/pricing"
+                className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium"
+              >
+                0 Credits
+              </Link>
 
               {/* Clerk Profile Button */}
               <UserButton
