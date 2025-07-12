@@ -20,19 +20,19 @@ function App() {
   return (
     <div className="min-h-screen bg-black text-black">
       {/* Navbar */}
-      <nav className="flex justify-between items-center px-6 py-4">
+      <nav className="flex justify-between items-center px-6 py-6">
         <div
           style={{ fontFamily: '"Brush Script MT", cursive' }}
           className="md:text-2xl font-bold text-white relative"
         >
           OVERLAYED
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-5">
           <Link
             to="/pricing"
             className="bg-white text-black px-4 py-2 rounded-md border border-black hover:bg-gray-200 text-lg font-medium"
           >
-            Pricing
+            5 Credits Free
           </Link>
 
           {/* Modal login/signup */}
@@ -45,7 +45,7 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="text-center py-20 px-4">
+      <section className="text-center py-24 px-4">
         <h1 className="text-4xl text-white md:text-6xl font-extrabold leading-tight">
           Insert Text Behind Images with{" "}
           <span className="text-orange-500 relative inline-block">
@@ -53,19 +53,16 @@ function App() {
             <div className="absolute -bottom-1 left-0 w-full h-1 bg-orange-900 rounded-full"></div>
           </span>
         </h1>
-        <p className="mt-6 text-gray-400 text-lg border border-gray-700 px-5 py-2 rounded-md inline-block">
+        <p className="mt-6 text-gray-400 text-lg border border-gray-600 px-8 py-2 rounded-md inline-block">
           Generate stunning YouTube thumbnails and content visuals that get
           noticed.
-        </p>
-        <p className="mt-6 text-black text-lg border absolute left-298 border-gray-200 font-medium px-6 py-2 rounded-md inline-block bg-white">
-          5 Credits
         </p>
 
       </section>
 
       {/* Image Grid */}
       <section className="px-6 pb-20 bg-black">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-9 max-w-7xl mx-auto">
           {[
             {
               src: "https://images.unsplash.com/photo-1750400519626-acbef0ec0915?auto=format&fit=crop&w=1470&q=80",
@@ -100,7 +97,7 @@ function App() {
                 src={img.src}
                 alt={`Preview ${idx + 1}`}
                 className={`w-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105 animate-fade-in ${
-                  img.ratio === "portrait" ? "h-[500px]" : "h-[300px]"
+                  img.ratio === "portrait" ? "h-[600px]" : "h-[300px]"
                 }`}
               />
             </div>

@@ -1,10 +1,62 @@
-// src/components/Home.jsx
-import { useUser, SignOutButton, UserButton } from "@clerk/clerk-react";
+import { useUser, UserButton } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Home() {
   const { isSignedIn, user } = useUser();
+  const [hasAccess, setHasAccess] = useState(null); // null = loading, true/false = result
+  console.log("🔍 Checking email:", user?.primaryEmailAddress?.emailAddress);
 
+  
+  useEffect(() => {
+    const checkAccess = async () => {
+      if (!user?.primaryEmailAddress?.emailAddress) return;
+
+      try {
+        const res = await axios.post("http://localhost:1337/api/auth/check-access", {
+          email: user.primaryEmailAddress.emailAddress,
+        });
+
+        setHasAccess(res.data.access);
+      } catch (err) {
+        console.error("Access check failed:", err);
+        setHasAccess(false); // fallback: no access
+      }
+    };
+
+    if (isSignedIn) checkAccess();
+  }, [user, isSignedIn]);
+
+  // 🔄 Loading State
+  if (hasAccess === null && isSignedIn) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-xl">🔄 Checking subscription status...</h1>
+        </div>
+      </div>
+    );
+  }
+
+  // ❌ Access Denied
+  if (hasAccess === false && isSignedIn) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
+        <div className="text-center max-w-md">
+          <h1 className="text-2xl mb-4">🚫 Access Denied</h1>
+          <p>Please purchase to unlock all features.</p>
+          <Link to="/pricing">
+            <button className="mt-6 bg-orange-500 px-4 py-2 rounded-md hover:bg-orange-600">
+              Upgrade Now
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // ✅ Main Content
   return (
     <div className="min-h-screen bg-black text-white px-6 py-6">
       {/* Navbar */}
@@ -26,15 +78,16 @@ function Home() {
                 0 Credits
               </Link>
 
-              {/* Clerk Profile Button */}
-              <UserButton
-                appearance={{
-                  elements: {
-                    avatarBox: "w-20 h-20",
-                  },
-                }}
-                afterSignOutUrl="/"
-              />
+              <div className="w-16 h-16">
+                <UserButton
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      avatarBox: "w-full h-full",
+                    },
+                  }}
+                />
+              </div>
             </>
           )}
         </div>
