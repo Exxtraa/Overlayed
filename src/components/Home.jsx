@@ -1,4 +1,4 @@
-import { useUser, UserButton } from "@clerk/clerk-react";
+import { useUser, UserButton, RedirectToSignIn } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,6 +13,8 @@ function Home() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    if (!isSignedIn) return;
+
     const checkAccess = async () => {
       if (!user?.primaryEmailAddress?.emailAddress) return;
 
@@ -31,8 +33,12 @@ function Home() {
       }
     };
 
-    if (isSignedIn) checkAccess();
-  }, [user, isSignedIn]);
+    checkAccess();
+  }, [isSignedIn, user]);
+
+  if (!isSignedIn) {
+    return <RedirectToSignIn />;
+  }
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
