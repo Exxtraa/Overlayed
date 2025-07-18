@@ -76,12 +76,14 @@ function Home() {
         <div className="text-center max-w-md bg-white text-black px-4 py-3 rounded-4xl border border-black text-lg font-medium">
           <h1 className="text-2xl mb-4">🚫 Access Denied</h1>
           <p>Please purchase to unlock all features.</p>
-          <br />
+          
+          <p className="mb-3 mt-3 bg-black text-white rounded-3xl">Use common email for payment and register.</p>
           <p style={{ color: "#FF0000" }}>
             I'm just 1 person, I need your support to keep the service running
             and pay for the servers! please purchase credits and continue using
             the service.
           </p>
+          
           <Link to="/pricing">
             <button className="mt-6 bg-orange-500 px-4 py-3 rounded-md hover:bg-orange-600">
               Upgrade Now
