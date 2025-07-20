@@ -88,7 +88,7 @@ function App() {
               span: "row-span-1"
             },
             {
-              src: "https://i.pinimg.com/736x/16/3b/55/163b5558b39fdb64146fd26a41806b74.jpg",
+              src: "https://i.pinimg.com/736x/e7/43/4c/e7434cbf5f05905a94fde5127a13b982.jpg",
               ratio: "landscape",
               span: "row-span-1"
             },
