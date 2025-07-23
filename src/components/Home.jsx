@@ -20,7 +20,7 @@ function Home() {
 
       try {
         const res = await axios.post(
-          "http://localhost:1337/api/auth/check-access",
+          "https://overlayed-backend.onrender.com/api/auth/check-access",
           {
             email: user.primaryEmailAddress.emailAddress,
           }
