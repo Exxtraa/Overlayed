@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   const { isSignedIn } = useUser();
@@ -132,6 +133,7 @@ function App() {
         .animation-delay-600 { animation-delay: 600ms; }
         .animation-delay-700 { animation-delay: 700ms; }
       `}</style>
+      <SpeedInsights />
     </div>
   );
 }
