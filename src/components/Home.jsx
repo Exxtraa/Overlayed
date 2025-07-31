@@ -14,27 +14,28 @@ function Home() {
 
   useEffect(() => {
     if (!isSignedIn) return;
-
+  
     const checkAccess = async () => {
       if (!user?.primaryEmailAddress?.emailAddress) return;
-
+  
       try {
-        const res = await axios.post(
-          "https://overlayed-backend.onrender.com/api/auth/check-access",
-          {
-            email: user.primaryEmailAddress.emailAddress,
-          }
+        // ✅ FIXED: Use the correct endpoint with GET request
+        const res = await axios.get(
+          `https://overlayed-backend.onrender.com/api/gumroad/check-access/${user.primaryEmailAddress.emailAddress}`
         );
-
-        setHasAccess(res.data.access);
+  
+        console.log("Access check response:", res.data);
+        setHasAccess(res.data.hasAccess); // ✅ Use hasAccess instead of access
       } catch (err) {
         console.error("Access check failed:", err);
+        console.error("Error details:", err.response?.data);
         setHasAccess(false);
       }
     };
-
+  
     checkAccess();
   }, [isSignedIn, user]);
+  
 
   if (!isSignedIn) {
     return <RedirectToSignIn />;
@@ -144,8 +145,6 @@ function Home() {
         </h1>
       </div>
 
-      {/* 🔄 File Upload and Editor */}
-      {/* 🔄 File Upload and Editor */}
       {/* 🔄 File Upload and Editor */}
       <div className="mt-22 text-white text-center relative min-h-[400px]">
         {!originalFile && !cutoutBlob && (
