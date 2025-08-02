@@ -23,7 +23,7 @@ function App() {
       {/* Navbar */}
       <nav className="flex justify-between items-center px-4 sm:px-6 py-4 sm:py-6">
         <div
-          className="text-base sm:text-xl md:text-1xl font-bold text-white relative"
+          className="text-base sm:text-xl md:text-1xl font-bold ml-14 text-white relative"
         >
           OVERLAYED
         </div>
@@ -82,22 +82,22 @@ function App() {
                 span: "row-span-2"
               },
               {
-                 src: "https://i.pinimg.com/736x/75/0f/a2/750fa2250c08f45a7af8429f9795fac5.jpg",
+                 src: "https://i.pinimg.com/736x/63/ab/63/63ab63046eb81db88bd39983e88c4fbf.jpg",
                 ratio: "portrait",
                 span: "row-span-2"
               },
               {
-                src: "https://i.pinimg.com/736x/b8/be/17/b8be178d01c0ffe651862a760eaae019.jpg",
+                src: "https://i.pinimg.com/736x/70/ad/c9/70adc975516b9303a09c6e6c6a2074ea.jpg",
                 ratio: "landscape",
                 span: "row-span-1"
               },
               {
-                src: "https://i.pinimg.com/736x/e7/43/4c/e7434cbf5f05905a94fde5127a13b982.jpg",
+                src: "https://i.pinimg.com/736x/5c/a6/50/5ca65015edf3b5469b8b8cbb32a968e8.jpg",
                 ratio: "landscape",
                 span: "row-span-1"
               },
               {
-                src: "https://i.pinimg.com/736x/ab/9e/3c/ab9e3cc296decbfde83f32b673dfd7dc.jpg",
+                src: "https://i.pinimg.com/736x/da/3a/19/da3a192fa5a3a3c46f51dd66900de667.jpg",
                 ratio: "landscape",
                 span: "row-span-1"
               },
@@ -122,7 +122,7 @@ function App() {
         </div>
 
         {/* Desktop/Tablet: Original Grid layout */}
-        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto auto-rows-[250px] md:auto-rows-[300px]">
+        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap- max-w-7xl mx-auto auto-rows-[250px] md:auto-rows-[300px]">
           {[
             {
               src: "https://i.pinimg.com/736x/62/9b/8d/629b8dcc56851c15833a4097e455e1a7.jpg",
@@ -130,22 +130,22 @@ function App() {
               span: "row-span-2"
             },
             {
-               src: "https://i.pinimg.com/736x/75/0f/a2/750fa2250c08f45a7af8429f9795fac5.jpg",
+               src: "https://i.pinimg.com/736x/63/ab/63/63ab63046eb81db88bd39983e88c4fbf.jpg",
               ratio: "portrait",
               span: "row-span-2"
             },
             {
-              src: "https://i.pinimg.com/736x/b8/be/17/b8be178d01c0ffe651862a760eaae019.jpg",
+              src: "https://i.pinimg.com/736x/70/ad/c9/70adc975516b9303a09c6e6c6a2074ea.jpg",
               ratio: "landscape",
               span: "row-span-1"
             },
             {
-              src: "https://i.pinimg.com/736x/e7/43/4c/e7434cbf5f05905a94fde5127a13b982.jpg",
+              src: "https://i.pinimg.com/736x/5c/a6/50/5ca65015edf3b5469b8b8cbb32a968e8.jpg",
               ratio: "landscape",
               span: "row-span-1"
             },
             {
-              src: "https://i.pinimg.com/736x/ab/9e/3c/ab9e3cc296decbfde83f32b673dfd7dc.jpg",
+              src: "https://i.pinimg.com/736x/da/3a/19/da3a192fa5a3a3c46f51dd66900de667.jpg",
               ratio: "landscape",
               span: "row-span-1"
             },
@@ -184,6 +184,8 @@ function App() {
         .animation-delay-600 { animation-delay: 600ms; }
         .animation-delay-700 { animation-delay: 700ms; }
       `}</style>
+
+      <h1 className="text-white">Hows this is all workk</h1>
       <SpeedInsights />
       <Analytics />
     </div>
