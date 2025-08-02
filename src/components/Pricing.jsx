@@ -44,7 +44,7 @@ function Pricing() {
       One-time payment, all features unlocked forever.
     </p>
 
-    <div className="text-3xl font-bold text-orange-500 mb-1">$5</div>
+    <div className="text-3xl font-bold text-orange-500 mb-1">$3</div>
     <p className="text-xs text-gray-500 mb-6">lifetime access</p>
 
     {/* Feature List */}
