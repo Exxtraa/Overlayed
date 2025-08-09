@@ -21,7 +21,7 @@ const GOOGLE_FONTS = [
   "Bebas Neue"
 ];
 
-export default function CanvasEditorKonva({ originalFile, cutoutBlob }) {
+export default function CanvasEditorKonva({ originalFile, cutoutBlob, onDownloadComplete }) {
   const [textObjects, setTextObjects] = useState([]);
   const [activeTextId, setActiveTextId] = useState(null);
   const [bgURL, setBgURL] = useState(null);
@@ -173,6 +173,10 @@ export default function CanvasEditorKonva({ originalFile, cutoutBlob }) {
     link.download = "image.png";
     link.href = uri;
     link.click();
+
+    if (onDownloadComplete) {
+      onDownloadComplete();
+    }
   };
 
   const constrainTextPosition = (e) => {

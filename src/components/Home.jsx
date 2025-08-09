@@ -14,16 +14,16 @@ function Home() {
 
   useEffect(() => {
     if (!isSignedIn) return;
-  
+
     const checkAccess = async () => {
       if (!user?.primaryEmailAddress?.emailAddress) return;
-  
+
       try {
         // ✅ FIXED: Use the correct endpoint with GET request
         const res = await axios.get(
           `https://overlayed-backend.onrender.com/api/gumroad/check-access/${user.primaryEmailAddress.emailAddress}`
         );
-  
+
         console.log("Access check response:", res.data);
         setHasAccess(res.data.hasAccess); // ✅ Use hasAccess instead of access
       } catch (err) {
@@ -32,10 +32,9 @@ function Home() {
         setHasAccess(false);
       }
     };
-  
+
     checkAccess();
   }, [isSignedIn, user]);
-  
 
   if (!isSignedIn) {
     return <RedirectToSignIn />;
@@ -44,6 +43,15 @@ function Home() {
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
+    // Check if user has already used their free trial and doesn't have access
+    const hasUsedFreeTrial =
+      localStorage.getItem("hasUsedFreeTrial") === "true";
+
+    if (!hasAccess && hasUsedFreeTrial) {
+      // Don't process the file, just show the subscription screen
+      return;
+    }
 
     setOriginalFile(file);
     setIsLoading(true);
@@ -61,6 +69,17 @@ function Home() {
     }
   };
 
+  // Function to handle download completion
+  const handleDownloadComplete = () => {
+    if (!hasAccess) {
+      localStorage.setItem("hasUsedFreeTrial", "true");
+      // Optionally, you could show a message here or redirect
+      setTimeout(() => {
+        window.location.reload(); // This will trigger the subscription screen
+      }, 1000);
+    }
+  };
+
   if (hasAccess === null && isSignedIn) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
@@ -71,20 +90,25 @@ function Home() {
     );
   }
 
-  if (hasAccess === false && isSignedIn) {
+  // Check if user has already used their free trial
+  const hasUsedFreeTrial = localStorage.getItem("hasUsedFreeTrial") === "true";
+
+  if (hasAccess === false && isSignedIn && hasUsedFreeTrial) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
         <div className="text-center max-w-md bg-white text-black px-4 py-3 rounded-4xl border border-black text-lg font-medium">
           <h1 className="text-2xl mb-4">🚫 Access Denied</h1>
           <p>Please purchase to unlock all features.</p>
-          
-          <p className="mb-3 mt-3 bg-black text-white rounded-3xl">Use common email for payment and register.</p>
+
+          <p className="mb-3 mt-3 bg-black text-white rounded-3xl">
+            Use common email for payment and register.
+          </p>
           <p style={{ color: "#FF0000" }}>
             I'm just 1 person, I need your support to keep the service running
             and pay for the servers! please purchase credits and continue using
             the service.
           </p>
-          
+
           <Link to="/pricing">
             <button className="mt-6 bg-orange-500 px-4 py-3 rounded-md hover:bg-orange-600">
               Upgrade Now
@@ -99,8 +123,10 @@ function Home() {
     <div className="min-h-screen bg-black text-white px-6 py-6">
       {/* Navbar */}
       <div className="flex justify-between items-center mb-10">
-        <div className="md:text-2xl font-bold text-white">
-          <h1 className="text-4xl md:text-sm bg-gray-800 font-bold border rounded-2xl p-1.5">Pro Account</h1>
+        <div className="text-lg sm:text-2xl md:text-2xl font-bold text-white">
+          <h1 className="text-2xl sm:text-3xl md:text-2xl lg:text-sm bg-gray-800 font-bold border rounded-2xl p-1.5">
+            {hasAccess ? "Pro Account" : "Free Trial"}
+          </h1>
         </div>
 
         <div className="flex items-center gap-3">
@@ -201,6 +227,7 @@ function Home() {
           <CanvasEditorKonva
             originalFile={originalFile}
             cutoutBlob={cutoutBlob}
+            onDownloadComplete={handleDownloadComplete}
           />
         )}
       </div>
