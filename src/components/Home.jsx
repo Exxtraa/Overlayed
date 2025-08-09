@@ -124,7 +124,7 @@ function Home() {
       {/* Navbar */}
       <div className="flex justify-between items-center mb-10">
         <div className="text-lg sm:text-2xl md:text-2xl font-bold text-white">
-          <h1 className="text-2xl sm:text-3xl md:text-2xl lg:text-sm bg-gray-800 font-bold border rounded-2xl p-1.5">
+          <h1 className="text-sm sm:text-3xl md:text-2xl lg:text-sm bg-gray-800 font-bold border rounded-2xl p-1.5">
             {hasAccess ? "Pro Account" : "Free Trial"}
           </h1>
         </div>
